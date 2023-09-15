@@ -41,13 +41,19 @@
 #
 ################################################################################
 
+## Paleta de Cores
+RED="\033[31m"
+GREEN="\033[32m"
+YELLOW="\033[33m"
+BLINK="\033[5m"
+RESET="\033[0m"
 
 
 # Verificar se a versão da linha de comando foi fornecida
 # Verificação da quantidade de argumentos passados na linha de comando ($#). 
 # Se nenhum argumento for fornecido, exibe uma mensagem de uso e sai com um código de erro.
 if [ $# -eq 0 ]; then
-  echo "Uso: $0 <versão_python>"
+  echo -e "${RED}Uso: $0 <versão_python>${RESET}"
   exit 1
 fi
 
@@ -56,8 +62,9 @@ fi
 # Se já instalada, exibe uma mensagem informando que a versão já está instalada e 
 # mostra as versões Python instaladas usando pyenv versions.
 if pyenv versions --bare | grep -q "$1"; then
-  echo "A versão Python $1 já está instalada. Versões instaladas:"
+  echo -e "${YELLOW}A versão Python $1 já está instalada. Versões instaladas:"
   pyenv versions
+  echo -e "${RESET}"
   exit 1
 fi
 
