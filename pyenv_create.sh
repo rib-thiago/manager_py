@@ -28,16 +28,20 @@
 # 0.0.1     [2023-01-07]  Thiago Ribeiro  Initial release.
 #
 
-# TODO:
-# None.
+# 
+# TODO: Testar se script recebeu versão da linha de comando, se não recebeu, exibir mensagem de ajuda 
+# TODO: Testar se versão informada já está instalada, se sim, mostrar versões instaladas
+# TODO: Instalar versão do python instalada
+# TODO: Usar versão instalada do para gerar a variável usada para criar o nome do diretório
+# TODO: Criar diretório com o nome da versão;
+# TODO: Exibir mensagem de confirmação
+# TODO: Testar se o pyenv está instalado e, do contrário, exibir mensagem de erro
 #
-# FIXME:
-# None.
-#
-# XXX:
-# None.
+# FIXME: None.
 #
 ################################################################################
+
+
 
 pyenv install $1  # Instale a versão Python desejada
 version_name="$(echo $1 | tr '.' '_')_py"  # Converta a versão para um nome de diretório
