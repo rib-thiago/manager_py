@@ -1,11 +1,15 @@
 #!/usr/bin/env bash
+################################################################################
+
 #
 # Script: 
 # pyenv_create.sh
+
 #
 # Description:
 # This is a bash script that allows you to automatically create directories named after
 # the python version during the installation process with pyenv
+
 #
 # Author: Thiago Ribeiro
 # Date: 2023-09-15
@@ -14,6 +18,7 @@
 #
 # Usage:
 # To run this script. type ./pyenv_create.sh <python-version>
+
 #
 # Dependencies:
 # - pyenv
@@ -22,21 +27,21 @@
 # --------------- #
 # Change Log       #
 # --------------- #
+
 #
 # Version   Date          Author          Description
 # -------   ----          ------          -----------
 # 0.0.1     [2023-01-07]  Thiago Ribeiro  Initial release.
-#
+
 
 # 
-# TODO: Instalar versão do python solicitada
-# TODO: Usar versão instalada do para gerar a variável usada para criar o nome do diretório
-# TODO: Criar diretório com o nome da versão;
-# TODO: Exibir mensagem de confirmação
-# TODO: Testar se o pyenv está instalado e, do contrário, exibir mensagem de erro
+# TODO: None.
+
 #
-# FIXME: Implementar uma barra de progresso quando da instalação do python
-#
+# FIXME: Implementar uma barra de progresso quando da instalação do python em segundo plano
+# FIXME: Função para escrever mensagem por parâmentros
+# FIXME: Só funciona até python 3.5
+
 ################################################################################
 
 ## Paleta de Cores
@@ -56,6 +61,15 @@ if [ $# -eq 0 ]; then
     echo -e "${RED}Uso: $0 <versão_python>${RESET}"
     exit 1
 fi
+
+# Veriricar se a versão fornecida é igual a no mínimo 3.5
+# Extrair a parte decimal da versão Python (exemplo: 3.7.1 -> 7)
+version_decimal=$(echo "$1" | cut -d. -f2)
+if ! [[ "$version_decimal" -ge 5 ]]; then
+    echo -e "${RED}Versão mínima para instalação: 3.5${RESET}"
+    exit 2
+fi
+
 
 # Verificar se a versão informada já está instalada
 # Usando o comando pyenv versions --bare e grep. 
@@ -90,10 +104,19 @@ fi
 
 # Converter a versão para um nome de diretório
 version_name="$(echo $1 | tr '.' '_')_py"
-read -p "Calma, respira!!!"
-exit 1
+if [ -d "$HOME/$version_name" ]; then
+    echo -e "${RED}O diretório $version_name existe em $HOME. ${RESET}"
+    echo -e "${YELLOW}Crie manualmente o diretório para a seus projetos nesta versão. ${RESET}"
+    exit 1
+else
+    read -p "Criando o diretório: ${version_name} em $HOME"
+    if mkdir -p $HOME/${version_name} &>/dev/null; then
+        echo -e "${GREEN}o diretório: ${version_name} foi criado em $HOME com sucesso!  ${RESET}"
+    else
+        echo -e "${RED}Erro ao criar o diretório  ${version_name} em $HOME. ${RESET}"
+        echo -e "${YELLOW}Crie manualmente o diretório para a seus projetos nesta versão${RESET}"
+        exit 1
+    fi
+fi
 
-# Criar o diretório
-# mkdir -p ~/${version_name}
-    
-    
+exit 0
