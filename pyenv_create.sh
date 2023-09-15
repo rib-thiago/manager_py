@@ -43,6 +43,31 @@
 
 
 
-pyenv install $1  # Instale a versão Python desejada
-version_name="$(echo $1 | tr '.' '_')_py"  # Converta a versão para um nome de diretório
-mkdir -p ~/python_versions/$version_name  # Crie o diretório
+# Verificar se a versão da linha de comando foi fornecida
+# Verificação da quantidade de argumentos passados na linha de comando ($#). 
+# Se nenhum argumento for fornecido, exibe uma mensagem de uso e sai com um código de erro.
+if [ $# -eq 0 ]; then
+  echo "Uso: $0 <versão_python>"
+  exit 1
+fi
+
+# Verificar se a versão informada já está instalada
+# Usando o comando pyenv versions --bare e grep. 
+# Se já instalada, exibe uma mensagem informando que a versão já está instalada e 
+# mostra as versões Python instaladas usando pyenv versions.
+if pyenv versions --bare | grep -q "$1"; then
+  echo "A versão Python $1 já está instalada. Versões instaladas:"
+  pyenv versions
+  exit 1
+fi
+
+# Instalar a versão Python desejada
+pyenv install $1
+
+# Converter a versão para um nome de diretório
+version_name="$(echo $1 | tr '.' '_')_py"
+
+# Criar o diretório
+mkdir -p ~/python_versions/$version_name
+
+echo "A versão Python $1 foi instalada com sucesso em ~/python_versions/$version_name."
