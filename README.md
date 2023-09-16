@@ -148,3 +148,45 @@ fi
 Salvar arquivo create_env_links.sh. 
 Executar ./create_env_links.sh 3.11.5 my_shared_env 
 	para criar um link simbólico para o ambiente virtual my_shared_env na versão Python 3.11.5.
+
+___
+
+# Configuração do Poetry
+
+Pode ser realizada através do comando `config` ou diretamente no arquivo `config.toml` que é gerado automaticamente quando executamos o comando `config` pela primeira vez.
+
+O arquivo `config.toml` nos sitemas *UNIX Like* segue, as especificações [XDG Base Directory], e está localizado em `~/.config/pypoetry`.
+
+## Configuração Local
+
+Poetry também permite ter configurações específicas para um projeto, passando a opção `--local` para o comando `config`:
+
+```bash {.line-numbers}
+poetry config virtualenvs.create false --local
+```
+
+As configurações locais de uma aplicação Poetry são armazenadas no arquivo `poetry.toml`, separado do arquivo `pyproject.toml`.
+
+***Atenção ao fazer check-in deste arquivo em seu repositório, pois ele pode conter informações confidenciais ou específicas do usuário.***
+
+## Listando as configurações atuais
+
+Para listar as configurações atuais, informe a opção `--list` ao comando `config`:
+
+```bash {.line-numbers}
+poetry config --list
+```
+
+que gerará uma saída semelhante a :
+
+```{.line-numbers}
+
+```
+
+
+
+___
+
+
+[XDG Base Directory]:<https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html>
+

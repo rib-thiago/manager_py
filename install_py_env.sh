@@ -93,8 +93,6 @@ if [ ${#missing_dependencies[@]} -gt 0 ]; then
                     # Comandos para instalar pipx
                     pip install --user pipx &>/dev/null
                     python3 -m pipx ensurepath &>/dev/null
-                    # pipx completions no final do .bashrc
-                    echo 'eval "$(register-python-argcomplete pipx)"' >> ~/.bashrc
                     teste_install=$(cowsay -t "Instalação do pipx bem sucedida")
                     echo -e "${GREEN} ${teste_install} ${RESET}"
                     ;;
