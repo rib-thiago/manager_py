@@ -25,17 +25,32 @@ $ tree
   0 directories, 4 files
 
 ```
+
+Script | Descrição
+------------ | -------------
+`install_py_env.sh` | Este script objetiva instalar as ferramentas `pyenv`, `pipx` e `poetry` para o gerenciamento do Ambiente de Desenvovlimento Python.
+`manage_env.sh` | Este script permite listar, criar, ativar ou desativar ambientes virtuais python usando o módulo `venv` da biblioteca padrão do python
+`pyenv_create.sh` | Este script permite a instalação de uma versão do python com o `pyenv`, bem como a criação automática de um diretório nomeado com base nesta versão para a organização dos projetos que compartilhem essa versão do Python.
+
+
 ### `install_py_env.sh`
 
-**Descrição**: Este script objetiva instalar as ferramentas `pyenv`, `pipx` e `poetry` para o gerenciamento do Ambiente de Desenvovlimento Python.
 
 ---
 
 ### `manage_env.sh`
 
-**Descrição**: Este script permite listar, criar, ativar ou desativar ambientes virtuais python usando o módulo `venv` da biblioteca padrão do python
+
+
 ---
 
 ### `pyenv_create.sh`
 
-**Descrição**: Este script permite a instalação de uma versão do python com o `pyenv`, bem como a criação automática de um diretório nomeado com base nesta versão para a organização dos projetos que compartilhem essa versão do Python.
+
+
+---
+
+
+
+
+
