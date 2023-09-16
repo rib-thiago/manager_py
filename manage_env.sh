@@ -7,7 +7,8 @@
 
 #
 # Description:
-# This is a bash script that allows you manage virtualenvs
+# This script allows you to list, create, activate or deactivate python virtual 
+# environments using the python's standard libary `venv` module.
 
 #
 # Author: Thiago Ribeiro
