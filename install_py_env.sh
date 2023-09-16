@@ -60,12 +60,16 @@ RESET="\033[0m"
 # Se o usuário optar por não instalar as dependências ausentes, 
 # o script apenas exibirá uma mensagem informando sobre as dependências ausentes.
 
+# Testar se cowsay está instalado
+if ! command -v "cowsay" >/dev/null 2>&1; then
+    pip install cowsay &>/dev/null
+fi
+
 # Lista de dependências e seus binários associados
 declare -A dependencies
 dependencies["git"]="git"
-dependencies["net-tools"]="ifconfig"
-dependencies["pyenv"]="pyenv"
 dependencies["pipx"]="pipx"
+dependencies["pyenv"]="pyenv"
 dependencies["poetry"]="poetry"
 
 # Verificar e instalar as dependências ausentes
@@ -85,30 +89,37 @@ if [ ${#missing_dependencies[@]} -gt 0 ]; then
         # Adicione os comandos de instalação aqui para as dependências ausentes
         for dep in "${missing_dependencies[@]}"; do
             case "$dep" in
+                "pipx")
+                    # Comandos para instalar pipx
+                    pip install --user pipx &>/dev/null
+                    python3 -m pipx ensurepath &>/dev/null
+                    # pipx completions no final do .bashrc
+                    echo 'eval "$(register-python-argcomplete pipx)"' >> ~/.bashrc
+                    teste_install=$(cowsay -t "Instalação do pipx bem sucedida")
+                    echo -e "${GREEN} ${teste_install} ${RESET}"
+                    ;;
                 "pyenv")
                     # Comandos para instalar pyenv
-                    git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+                    git clone https://github.com/pyenv/pyenv.git ~/.pyenv &>/dev/null
                     # variáveis de ambiente do .bashrc
                     echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
                     echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
                     echo 'eval "$(pyenv init --path)"' >> ~/.bashrc
-                    ;;
-                "pipx")
-                    # Comandos para instalar pipx
-                    pip install --user pipx
-                    python3 -m pipx ensurepath
-                    pipx list
-                    pipx install cowsay
-                    cowsay -t "Instalação do pipx bem sucedida"
-                    # pipx completions no final do .bashrc
-                    echo 'eval "$(register-python-argcomplete pipx)"' >> ~/.bashrc
+                    if pyenv --version &>/dev/null; then
+                        teste_install=$(cowsay -t "Instalação do pyenv bem sucedida")
+                        echo -e "${GREEN} ${teste_install} ${RESET}"
+                    fi
                     ;;
                 "poetry")
                     # Comandos para instalar poetry
-                    curl -sSL https://install.python-poetry.org | python3 - --git https://github.com/python-poetry/poetry.git@master
+                    curl -sSL https://install.python-poetry.org | python3 - --git https://github.com/python-poetry/poetry.git@master &>/dev/null
+                    if poetry --version &>/dev/null; then
+                        teste_install=$(cowsay -t "Instalação do poetry bem sucedida")
+                        echo -e "${GREEN} ${teste_install} ${RESET}"
+                    fi
                     ;;
                 *)
-                    echo "Comandos de instalação para $dep não especificados."
+                    echo -e "${RED}Comandos de instalação para $dep não especificados. ${RESET}"
                     ;;
             esac
         done
