@@ -7,7 +7,8 @@
 
 #
 # Description:
-# This is a bash script that allows you install pyenv in a Ubuntu Distro
+# This script aims to install the `pyenv`, `pipx` and `poetry` tools for 
+# managing the Python Development Environment.
 
 #
 # Author: Thiago Ribeiro

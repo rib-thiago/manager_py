@@ -7,9 +7,9 @@
 
 #
 # Description:
-# This is a bash script that allows you to automatically create directories named after
-# the python version during the installation process with pyenv
-
+# This script allows the installation of a version of Python with `pyenv`, 
+# as well as the automatic creation of a directory named based on this version 
+# for organizing projects that share this version of Python.
 #
 # Author: Thiago Ribeiro
 # Date: 2023-09-15
