@@ -33,9 +33,9 @@ $ tree
 
 ### `manage_env.sh`
 
-**Descrição**: Este script permite a listagem, criação, ativação e desativação de ambientes virtuais python.
+**Descrição**: Este script permite listar, criar, ativar ou desativar ambientes virtuais python usando o módulo `venv` da biblioteca padrão do python
 ---
 
 ### `pyenv_create.sh`
 
-**Descrição**: Este script permite a instalação de uma versão do python com o `pyenv`, bem como a criação de diretórios para a organização de projetos com base nesta versão.
+**Descrição**: Este script permite a instalação de uma versão do python com o `pyenv`, bem como a criação automática de um diretório nomeado com base nesta versão para a organização dos projetos que compartilhem essa versão do Python.
