@@ -109,9 +109,9 @@ if [ -d "$HOME/$version_name" ]; then
     echo -e "${YELLOW}Crie manualmente o diretório para a seus projetos nesta versão. ${RESET}"
     exit 1
 else
-    read -p "Criando o diretório: ${version_name} em $HOME"
-    if mkdir -p $HOME/${version_name} &>/dev/null; then
-        echo -e "${GREEN}o diretório: ${version_name} foi criado em $HOME com sucesso!  ${RESET}"
+    read -p "Criando o diretório: ${version_name} em $HOME/PYTHON"
+    if mkdir -p $HOME/PYTHON/${version_name} &>/dev/null; then
+        echo -e "${GREEN}o diretório: ${version_name} foi criado em $HOME/PYTHON com sucesso!  ${RESET}"
     else
         echo -e "${RED}Erro ao criar o diretório  ${version_name} em $HOME. ${RESET}"
         echo -e "${YELLOW}Crie manualmente o diretório para a seus projetos nesta versão${RESET}"
