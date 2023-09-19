@@ -8,7 +8,7 @@
 #
 # Description:
 # This script aims to install the `pyenv`, `pipx` and `poetry` tools for 
-# managing the Python Development Environment.
+# managing the Python Development Environment in Ubuntu and his flavors
 
 #
 # Author: Thiago Ribeiro
@@ -38,7 +38,8 @@
 # TODO: Verificar as Dependências para instalar o pynv, pipx e poetry
 
 #
-# FIXME: 
+# FIXME: O pip não vem instalado no Python do Ubuntu, então é preciso instalar
+#        ele antes. 
 
 
 ################################################################################
@@ -52,14 +53,11 @@ RESET="\033[0m"
 
 ## Validação
 
-# Utilizamos command -v para verificar a presença de executáveis no sistema.
-# Isso é uma abordagem mais precisa do que usar dpkg -l e grep para verificar a instalação.
-# Quando uma dependência ausente é encontrada, o script perguntará ao usuário se deseja instalá-la 
-# permitindo uma escolha mais flexível.
-# Usamos read -p para receber a resposta do usuário.#
-# O script verifica se a resposta do usuário é "Y" ou "y" antes de prosseguir com a instalação.
-# Se o usuário optar por não instalar as dependências ausentes, 
-# o script apenas exibirá uma mensagem informando sobre as dependências ausentes.
+# Testar se o pip está instalado
+if ! command -v "pip" >/dev/null 2>&1; then
+    echo "O pip não está instalado. Instalando o pip..."
+    sudo apt install python3-pip
+fi
 
 # Testar se cowsay está instalado
 if ! command -v "cowsay" >/dev/null 2>&1; then
